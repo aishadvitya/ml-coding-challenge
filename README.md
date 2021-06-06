@@ -57,33 +57,42 @@ _3. Implement an API according to the open api specification._
        docker build -t codegen-image:latest . 
        docker run -d -p 8080:8080 codegen-image
 10. Provide some sample curl commands or a [Postman](https://www.postman.com/) collection.
-     curl --location --request POST 'http://localhost:8080/prediction?body=This%20is%20a%20sample%20text%20for%20prediction%20testing%20something%20about%20apollo%2011%20' \
-   --header 'Content-Type: application/json' \
---data-raw '{"text": "some text about apollo"}'
 
-sample reponse:
-{
-    "label": "['cryptography']"
-}
+        curl --location --request POST 'http://localhost:8080/prediction?body=This%20is%20a%20sample%20text%20for%20prediction%20testing%20something%20about%20apollo%2011%20' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{"text": "some text about apollo"}'
+
+     sample reponse:
+          {
+            "label": "['cryptography']"
+           }
 
 12. *Stretch Goal 1* - Suggest and/or implement improvements to the model.
-       Added new method _train_with_hp_ in model.py for hyperparameter tuning to multinomialNB , Ngram vectr, use_idf  using RandomizedSearchCV . 
-       Results are as follows:
-       **_After hyperparameter tuning_**
-       Best score accurracy = 94.885%
+
+     Added new method _train_with_hp_ in model.py for hyperparameter tuning to multinomialNB , Ngram vectr, use_idf  using RandomizedSearchCV . 
+     
+     Results are as follows:
+     
+     **_After hyperparameter tuning_**
+     
+     Best score accurracy = 94.885%
        Best parameters are : 
        {'vect__ngram_range': (1, 1), 'tfidf__use_idf': True, 'tfidf__norm': 'l2', 'clf__fit_prior': True, 'clf__alpha': 0.7}
 
        Predicted label: ['space' 'space' 'space' ... 'baseball' 'hockey' 'baseball']
-       **_Previous model_**
-       accuracy 0.8702490170380078
+     
+     **_Previous model_**
+      
+      accuracy 0.8702490170380078
        
 14. *Stretch Goal 2* - Testing of the API before deployment.
-       install pytest using 
-       >>> pip3 install -U requests Flask pytest pytest-html
-       >>> cd test-api
-       >>> pytest 
-       =========================================================================================================== test session starts ============================================================================================================
+       
+          install pytest using 
+          pip3 install -U requests Flask pytest pytest-html
+          cd test-api
+          pytest 
+=========================================================================================================== test session starts ============================================================================================================
+
 platform win32 -- Python 3.8.5, pytest-6.2.4, py-1.9.0, pluggy-0.13.1
 rootdir: D:\ML\ml-challenge\ml-challenge-main\test-api
 plugins: html-3.1.1, metadata-1.11.0
